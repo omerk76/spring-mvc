@@ -1,15 +1,24 @@
 package com.packt.webstore.domain;
 
+import java.io.Serializable;
+
 /**
  * Created by okeynan on 4/19/15.
  */
-public class Customer {
-    String customerId;
-    String name;
-    String address;
-    int    noOfOrdersMade;
+public class Customer implements Serializable {
+    String  customerId;
+    String  name;
+    Address address;
+    int     noOfOrdersMade;
 
     public Customer() {
+        address = new Address();
+    }
+
+    public Customer(String customerId, String name) {
+        this();
+        this.customerId = customerId;
+        this.name = name;
     }
 
     public String getCustomerId() {
@@ -28,11 +37,11 @@ public class Customer {
         this.name = name;
     }
 
-    public String getAddress() {
+    public Address getAddress() {
         return address;
     }
 
-    public void setAddress(String address) {
+    public void setAddress(Address address) {
         this.address = address;
     }
 

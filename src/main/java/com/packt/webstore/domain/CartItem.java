@@ -1,11 +1,12 @@
 package com.packt.webstore.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
  * Created by okeynan on 4/28/15.
  */
-public class CartItem {
+public class CartItem implements Serializable{
     private Product    mProduct;
     private int        quantity;
     private BigDecimal totalPrice;

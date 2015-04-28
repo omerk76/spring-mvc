@@ -1,5 +1,6 @@
 package com.packt.webstore.service;
 
+import com.packt.webstore.domain.Order;
 import com.packt.webstore.exception.ProductNotFoundException;
 
 /**
@@ -8,4 +9,6 @@ import com.packt.webstore.exception.ProductNotFoundException;
 public interface OrderService {
 
     void processOrder(String productId, int count) throws ProductNotFoundException;
+
+    Long saveOrder(Order order);
 }

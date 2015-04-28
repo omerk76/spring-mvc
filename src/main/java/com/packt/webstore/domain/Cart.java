@@ -1,5 +1,6 @@
 package com.packt.webstore.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Map;
@@ -7,7 +8,7 @@ import java.util.Map;
 /**
  * Created by okeynan on 4/28/15.
  */
-public class Cart {
+public class Cart implements Serializable{
 
     private String                cartId;
     private Map<String, CartItem> mCartItems;
