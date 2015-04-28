@@ -8,13 +8,6 @@
     <title>Welcome</title>
 </head>
 <body>
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1 class="alert alert-danger"> There is no product found with the Product id ${invalidProductId}</h1>
-        </div>
-    </div>
-</section>
 
 <section>
     <div class="container">

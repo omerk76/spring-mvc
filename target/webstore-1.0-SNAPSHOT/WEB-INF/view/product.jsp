@@ -12,13 +12,7 @@
     <title>Products</title>
 </head>
 <body>
-<section>
-    <div class="jumbotron">
-        <div class="container">
-            <h1>Products</h1>
-        </div>
-    </div>
-</section>
+
 <section class="container" ng-app="cartApp">
     <div class="row">
         <div class="col-md-5">
