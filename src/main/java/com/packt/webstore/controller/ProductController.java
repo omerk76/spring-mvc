@@ -4,6 +4,7 @@ import com.packt.webstore.domain.Product;
 import com.packt.webstore.exception.NoProductsFoundUnderCategoryException;
 import com.packt.webstore.exception.ProductNotFoundException;
 import com.packt.webstore.service.ProductService;
+import com.packt.webstore.validator.UnitInStockValidator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,6 +15,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -29,6 +31,9 @@ public class ProductController {
 
     @Autowired
     ProductService mProductService;
+
+    @Autowired
+    UnitInStockValidator mUnitInStockValidator;
 
     @RequestMapping
     public String list(Model model) {
@@ -96,7 +101,10 @@ public class ProductController {
     }
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
-    public String processNewProductForm(@ModelAttribute("newProduct") Product newProd, BindingResult bindingResult, HttpServletRequest request) {
+    public String processNewProductForm(@ModelAttribute("newProduct") @Valid Product newProd, BindingResult bindingResult, HttpServletRequest request) {
+        if (bindingResult.hasErrors()) {
+            return "addProduct";
+        }
         MultipartFile image = newProd.getProductImage();
         String rootDirectory = request.getSession().getServletContext().getRealPath("/");
         if (image != null && !image.isEmpty()) {
@@ -128,6 +136,7 @@ public class ProductController {
     @InitBinder
     public void initializeBinder(WebDataBinder binder) {
         binder.setDisallowedFields("unitsInOrder", "discontinued");
+        binder.setValidator(mUnitInStockValidator);
     }
 
     @ExceptionHandler(ProductNotFoundException.class)
